@@ -4,37 +4,80 @@ require 'json'
 
 
 module Lugloc
-  module_method def get_location(
-      token: get_token,
-      **c
-  )
+  module_method def get_location(**c)
+    call_get(
+        path: '',
+        **c
+    )
   end
 
-  module_method def call_api(
-    device_id:,
-    path: '',
-    lugloc_url: 'https://api.lugloc.com/api',
-    net_method: Net::HTTP::Get,
-    token: get_token,
+  module_method def get_history(**c)
+    call_get(
+        path: 'locationHistory',
+        **c
+    )
+  end
+
+  module_method def refresh_location(**c)
+    call_post(
+        path: 'refreshlocation',
+        **c
+    )
+  end
+
+  module_method def turn_off(
+    minutes:,
     **c
   )
-  uri = URI.join(lugloc_url, path)
-  req = net_method.new(uri)
-  req['Authorization'] = "Bearer #{token}"
-
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-  res = http.request(req)
-
-  return res.body, res
+    call_post(
+        query: {'minutes' => minutes},
+        path: 'turnOff',
+        **c
+    )
   end
 
 
 
 
   private
+
+  module_method def call_get(**c)
+    call_api(
+        net_method: Net::HTTP::Get,
+        **c
+    )
+  end
+
+  module_method def call_post(**c)
+    call_api(
+      net_method: Net::HTTP::Post,
+      **c
+    )
+  end
+
+  module_method def call_api(
+    device_id:,
+    net_method:,
+    path:,
+    query: {},
+    lugloc_url: 'https://api.lugloc.com/api',
+    token: get_token,
+    **c
+  )
+
+    uri = URI.join(lugloc_url, "/#{device_id}/#{path}")
+              .query(URI.encode_www_form(query))
+    req = net_method.new(uri)
+    req['Authorization'] = "Bearer #{token}"
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    res = http.request(req)
+
+    return res.body, res
+  end
 
   # Note that we do no error handling here
   def get_token(
