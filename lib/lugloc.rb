@@ -4,28 +4,28 @@ require 'json'
 
 
 module Lugloc
-  module_method def get_location(**c)
+  module_function def get_location(**c)
     call_get(
         path: '',
         **c
     )
   end
 
-  module_method def get_history(**c)
+  module_function def get_history(**c)
     call_get(
         path: 'locationHistory',
         **c
     )
   end
 
-  module_method def refresh_location(**c)
+  module_function def refresh_location(**c)
     call_post(
         path: 'refreshlocation',
         **c
     )
   end
 
-  module_method def turn_off(
+  module_function def turn_off(
     minutes:,
     **c
   )
@@ -41,21 +41,21 @@ module Lugloc
 
   private
 
-  module_method def call_get(**c)
+  module_function def call_get(**c)
     call_api(
         net_method: Net::HTTP::Get,
         **c
     )
   end
 
-  module_method def call_post(**c)
+  module_function def call_post(**c)
     call_api(
       net_method: Net::HTTP::Post,
       **c
     )
   end
 
-  module_method def call_api(
+  module_function def call_api(
     device_id:,
     net_method:,
     path:,
