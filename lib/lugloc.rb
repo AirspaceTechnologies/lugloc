@@ -66,7 +66,8 @@ module Lugloc
   )
 
     uri = URI.join(lugloc_url, "/#{device_id}/#{path}")
-              .query(URI.encode_www_form(query))
+    uri.query = URI.encode_www_form(query)
+
     req = net_method.new(uri)
     req['Authorization'] = "Bearer #{token}"
 
