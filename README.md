@@ -37,6 +37,37 @@ Alternatively, you can pass values in to the methods:
         device_id:          'xyz123'
     )
     
+##Example Results
+     get_location:
+     
+    {
+        "DeviceId"=>90137679,
+        "CustomerId"=>9194,
+        "DeviceName"=>"Test1",
+        "Status"=>"Normal",
+        "IconUrl"=>nil,
+        "ActivationDate"=>"2016-04-20T23:52:15.757Z",
+        "LastLatitude"=>33.096138,
+        "LastLongitude"=>-117.308979,
+        "LastAccuracy"=>nil,
+        "LastLocationGeneralDescription"=>"California,
+        United States",
+        "LastLocationSpecificDescription"=>"Carlsbad",
+        "LastPositionUpdate"=>"2016-07-19T18:41:43.433Z",
+        "Battery"=>"100%",
+        "LastBatteryUpdate"=>"2016-07-19T18:42:01.350Z",
+        "HasBluetooth"=>true,
+        "BluetoothID"=>"LUGLOC-E6DA",
+        "AllwaysOn"=>false,
+        "HasTraces"=>true,
+        "TracesExpirationDate"=>"2017-05-27T20:18:53.757Z",
+        "FreeUTraces"=>false,
+        "FreeUTracesExpirationDate"=>"2016-05-18T04:18:38.977Z",
+        "HasRfOffMode"=>true,
+        "LastLocationPhotoUrl"=>"https://lh6.googleusercontent.com/-DtOSORm5Tvw/V4KFDP7a1KI/AAAAAAACItE/DQw82MKmDWYxM1NbKZXC2zaBKskMy_BWQCLIB/s1600-w600/"
+    }
+    
+    
 ## Development
 
 After checking out the repo, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
